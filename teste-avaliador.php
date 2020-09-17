@@ -18,4 +18,8 @@ $leiloeiro->avalia($leilao);
 
 $maiorValor = $leiloeiro->getMaiorValor();
 
-echo $maiorValor;
+if ($maiorValor === 2500.0) {
+    echo "TESTE OK";
+} else {
+    echo "TESTE FALHOU";
+}
