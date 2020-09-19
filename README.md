@@ -11,3 +11,5 @@ Given-When-Then: https://martinfowler.com/bliki/GivenWhenThen.html
 # PHPUnit
 $ composer require --dev phpunit/phpunit ^9
 $ vendor/bin/phpunit --version
+$ vendor/bin/phpunit tests
+$ vendor/bin/phpunit --colors tests/
