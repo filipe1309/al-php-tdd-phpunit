@@ -13,3 +13,6 @@ $ composer require --dev phpunit/phpunit ^9
 $ vendor/bin/phpunit --version
 $ vendor/bin/phpunit tests
 $ vendor/bin/phpunit --colors tests/
+
+"Análise de valor limite" & "Particionamento de Equivalência"
+http://testwarequality.blogspot.com/p/tenicas-de-teste.html
