@@ -12,6 +12,7 @@ class AvaliadorTest extends TestCase
 
     protected function setUp(): void
     {
+        echo 'Executando setUp...' . PHP_EOL;
         $this->leiloeiro = new Avaliador();
     }
 
@@ -72,6 +73,8 @@ class AvaliadorTest extends TestCase
 
     public function leilaoEmOrdemCrescente()
     {
+        echo 'Criando em ordem crescente...' . PHP_EOL;
+
          # Arrange/Given - A inicialização do cenário
          $leilao = new Leilao('Fiat 147 0km');
 
@@ -90,6 +93,8 @@ class AvaliadorTest extends TestCase
 
     public function leilaoEmOrdemDecrescente()
     {
+        echo 'Criando em ordem decrescente...' . PHP_EOL;
+
          # Arrange/Given - A inicialização do cenário
          $leilao = new Leilao('Fiat 147 0km');
 
@@ -108,7 +113,9 @@ class AvaliadorTest extends TestCase
 
     public function leilaoEmOrdemAleatoria()
     {
-         # Arrange/Given - A inicialização do cenário
+        echo 'Criando em ordem aleatoria...' . PHP_EOL;
+        
+        # Arrange/Given - A inicialização do cenário
          $leilao = new Leilao('Fiat 147 0km');
 
          $maria = new Usuario('Maria');
