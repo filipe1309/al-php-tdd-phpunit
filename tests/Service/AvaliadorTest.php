@@ -11,13 +11,7 @@ class AvaliadorTest extends TestCase
     public function testOAvaliadorDeveEncontrarOMaiorValorDeLanceEmOrdemCrescente()
     {
         # Arrange/Given - A inicialização do cenário
-        $leilao = new Leilao('Fiat 147 0km');
-
-        $maria = new Usuario('Maria');
-        $joao = new Usuario('João');
-
-        $leilao->recebeLance(new Lance($joao, 2000));
-        $leilao->recebeLance(new Lance($maria, 2500));
+        $leilao = $this->leilaoEmOrdemCrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -35,13 +29,7 @@ class AvaliadorTest extends TestCase
     public function testOAvaliadorDeveEncontrarOMaiorValorDeLanceEmOrdemDecrescente()
     {
         # Arrange/Given - A inicialização do cenário
-        $leilao = new Leilao('Fiat 147 0km');
-
-        $maria = new Usuario('Maria');
-        $joao = new Usuario('João');
-
-        $leilao->recebeLance(new Lance($maria, 2500));
-        $leilao->recebeLance(new Lance($joao, 2000));
+        $leilao = $this->leilaoEmOrdemDecrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -59,13 +47,7 @@ class AvaliadorTest extends TestCase
     public function testOAvaliadorDeveEncontrarOMenorValorDeLanceEmOrdemCrescente()
     {
         # Arrange/Given - A inicialização do cenário
-        $leilao = new Leilao('Fiat 147 0km');
-
-        $maria = new Usuario('Maria');
-        $joao = new Usuario('João');
-
-        $leilao->recebeLance(new Lance($joao, 2000));
-        $leilao->recebeLance(new Lance($maria, 2500));
+        $leilao = $this->leilaoEmOrdemCrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -75,7 +57,7 @@ class AvaliadorTest extends TestCase
         $menorValor = $leiloeiro->getMenorValor();
 
         # Assert/Then - A verificação do resultado
-        $valorEsperado = (float) 2000;
+        $valorEsperado = (float) 1700;
 
         self::assertEquals($valorEsperado, $menorValor);
     }
@@ -83,13 +65,7 @@ class AvaliadorTest extends TestCase
     public function testOAvaliadorDeveEncontrarOMenorValorDeLanceEmOrdemDecrescente()
     {
         # Arrange/Given - A inicialização do cenário
-        $leilao = new Leilao('Fiat 147 0km');
-
-        $maria = new Usuario('Maria');
-        $joao = new Usuario('João');
-
-        $leilao->recebeLance(new Lance($maria, 2500));
-        $leilao->recebeLance(new Lance($joao, 2000));
+        $leilao = $this->leilaoEmOrdemDecrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -99,7 +75,7 @@ class AvaliadorTest extends TestCase
         $menorValor = $leiloeiro->getMenorValor();
 
         # Assert/Then - A verificação do resultado
-        $valorEsperado = (float) 2000;
+        $valorEsperado = (float) 1700;
 
         self::assertEquals($valorEsperado, $menorValor);
     }
@@ -126,5 +102,53 @@ class AvaliadorTest extends TestCase
         static::assertEquals((float) 2000, $maioresLancesArr[0]->getValor());
         static::assertEquals((float) 1700, $maioresLancesArr[1]->getValor());
         static::assertEquals((float) 1500, $maioresLancesArr[2]->getValor());
+    }
+
+    public function leilaoEmOrdemCrescente()
+    {
+         # Arrange/Given - A inicialização do cenário
+         $leilao = new Leilao('Fiat 147 0km');
+
+         $maria = new Usuario('Maria');
+         $joao = new Usuario('João');
+         $ana = new Usuario('Ana');
+ 
+         $leilao->recebeLance(new Lance($ana, 1700));
+         $leilao->recebeLance(new Lance($joao, 2000));
+         $leilao->recebeLance(new Lance($maria, 2500));
+
+         return $leilao;
+    }
+
+    public function leilaoEmOrdemDecrescente()
+    {
+         # Arrange/Given - A inicialização do cenário
+         $leilao = new Leilao('Fiat 147 0km');
+
+         $maria = new Usuario('Maria');
+         $joao = new Usuario('João');
+         $ana = new Usuario('Ana');
+ 
+         $leilao->recebeLance(new Lance($maria, 2500));
+         $leilao->recebeLance(new Lance($joao, 2000));
+         $leilao->recebeLance(new Lance($ana, 1700));
+
+         return $leilao;
+    }
+
+    public function leilaoEmOrdemAleatoria()
+    {
+         # Arrange/Given - A inicialização do cenário
+         $leilao = new Leilao('Fiat 147 0km');
+
+         $maria = new Usuario('Maria');
+         $joao = new Usuario('João');
+         $ana = new Usuario('Ana');
+ 
+         $leilao->recebeLance(new Lance($joao, 2000));
+         $leilao->recebeLance(new Lance($maria, 2500));
+         $leilao->recebeLance(new Lance($ana, 1700));
+
+         return $leilao;
     }
 }
