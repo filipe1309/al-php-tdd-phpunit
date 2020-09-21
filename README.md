@@ -16,3 +16,7 @@ $ vendor/bin/phpunit --colors tests/
 
 "Análise de valor limite" & "Particionamento de Equivalência"
 http://testwarequality.blogspot.com/p/tenicas-de-teste.html
+
+## After add phpunit xml config file
+$ vendor/bin/phpunit
+
