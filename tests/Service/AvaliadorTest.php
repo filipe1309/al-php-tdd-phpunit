@@ -10,7 +10,7 @@ class AvaliadorTest extends TestCase
 {
     private $leiloeiro;
 
-    public function criaAvaliador()
+    protected function setUp(): void
     {
         $this->leiloeiro = new Avaliador();
     }
@@ -22,8 +22,6 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveEncontrarOMaiorValorDeLance(Leilao $leilao)
     {
-        $this->criaAvaliador();
-
         # Act/When - A execução da regra de negócio
         $this->leiloeiro->avalia($leilao);
 
@@ -42,8 +40,6 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveEncontrarOMenorValorDeLance(Leilao $leilao)
     {
-        $this->criaAvaliador();
-
         # Act/When - A execução da regra de negócio
         $this->leiloeiro->avalia($leilao);
 
@@ -62,7 +58,6 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveBuscar3MaioresValores(Leilao $leilao)
     {
-        $this->criaAvaliador();
         $this->leiloeiro->avalia($leilao);
 
         $maioresLancesArr = $this->leiloeiro->getMaioresLances();
@@ -73,7 +68,7 @@ class AvaliadorTest extends TestCase
         static::assertEquals((float) 1700, $maioresLancesArr[2]->getValor());
     }
 
-    /* --- DADOS ------------- */
+    /* --- DADOS --- */
 
     public function leilaoEmOrdemCrescente()
     {
