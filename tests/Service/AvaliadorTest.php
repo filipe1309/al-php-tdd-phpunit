@@ -8,29 +8,11 @@ use Alura\Leilao\Service\Avaliador;
 
 class AvaliadorTest extends TestCase
 {
-    public function testOAvaliadorDeveEncontrarOMaiorValorDeLanceEmOrdemCrescente()
+    /**
+     * @dataProvider entregaLeiloes
+     */
+    public function testOAvaliadorDeveEncontrarOMaiorValorDeLance(Leilao $leilao)
     {
-        # Arrange/Given - A inicialização do cenário
-        $leilao = $this->leilaoEmOrdemCrescente();
-
-        $leiloeiro = new Avaliador();
-
-        # Act/When - A execução da regra de negócio
-        $leiloeiro->avalia($leilao);
-
-        $maiorValor = $leiloeiro->getMaiorValor();
-
-        # Assert/Then - A verificação do resultado
-        $valorEsperado = (float) 2500;
-
-        self::assertEquals($valorEsperado, $maiorValor);
-    }
-
-    public function testOAvaliadorDeveEncontrarOMaiorValorDeLanceEmOrdemDecrescente()
-    {
-        # Arrange/Given - A inicialização do cenário
-        $leilao = $this->leilaoEmOrdemDecrescente();
-
         $leiloeiro = new Avaliador();
 
         # Act/When - A execução da regra de negócio
@@ -150,5 +132,14 @@ class AvaliadorTest extends TestCase
          $leilao->recebeLance(new Lance($ana, 1700));
 
          return $leilao;
+    }
+
+    public function entregaLeiloes()
+    {
+        return [
+            [$this->leilaoEmOrdemCrescente()],
+            [$this->leilaoEmOrdemDecrescente()],
+            [$this->leilaoEmOrdemAleatoria()],
+        ];
     }
 }
