@@ -8,6 +8,13 @@ use Alura\Leilao\Service\Avaliador;
 
 class AvaliadorTest extends TestCase
 {
+    private $leiloeiro;
+
+    public function criaAvaliador()
+    {
+        $this->leiloeiro = new Avaliador();
+    }
+
     /**
      * @dataProvider leilaoEmOrdemCrescente
      * @dataProvider leilaoEmOrdemDecrescente
@@ -15,12 +22,12 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveEncontrarOMaiorValorDeLance(Leilao $leilao)
     {
-        $leiloeiro = new Avaliador();
+        $this->criaAvaliador();
 
         # Act/When - A execução da regra de negócio
-        $leiloeiro->avalia($leilao);
+        $this->leiloeiro->avalia($leilao);
 
-        $maiorValor = $leiloeiro->getMaiorValor();
+        $maiorValor = $this->leiloeiro->getMaiorValor();
 
         # Assert/Then - A verificação do resultado
         $valorEsperado = (float) 2500;
@@ -35,12 +42,12 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveEncontrarOMenorValorDeLance(Leilao $leilao)
     {
-        $leiloeiro = new Avaliador();
+        $this->criaAvaliador();
 
         # Act/When - A execução da regra de negócio
-        $leiloeiro->avalia($leilao);
+        $this->leiloeiro->avalia($leilao);
 
-        $menorValor = $leiloeiro->getMenorValor();
+        $menorValor = $this->leiloeiro->getMenorValor();
 
         # Assert/Then - A verificação do resultado
         $valorEsperado = (float) 1700;
@@ -55,16 +62,18 @@ class AvaliadorTest extends TestCase
      */
     public function testOAvaliadorDeveBuscar3MaioresValores(Leilao $leilao)
     {
-        $leiloeiro = new Avaliador();
-        $leiloeiro->avalia($leilao);
+        $this->criaAvaliador();
+        $this->leiloeiro->avalia($leilao);
 
-        $maioresLancesArr = $leiloeiro->getMaioresLances();
+        $maioresLancesArr = $this->leiloeiro->getMaioresLances();
 
         static::assertCount(3, $maioresLancesArr);
         static::assertEquals((float) 2500, $maioresLancesArr[0]->getValor());
         static::assertEquals((float) 2000, $maioresLancesArr[1]->getValor());
         static::assertEquals((float) 1700, $maioresLancesArr[2]->getValor());
     }
+
+    /* --- DADOS ------------- */
 
     public function leilaoEmOrdemCrescente()
     {
