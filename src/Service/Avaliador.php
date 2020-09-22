@@ -14,6 +14,10 @@ class Avaliador
     {
         $lances = $leilao->getLances();
 
+        if (empty($lances)) {
+            throw new \DomainException('Nao eh possivel avaliar leilao vazio');
+        }
+
         foreach ($lances as $lance) {
             if ($lance->getValor() > $this->maiorValor) {
                 $this->maiorValor = $lance->getValor();

@@ -69,6 +69,12 @@ class AvaliadorTest extends TestCase
         static::assertEquals((float) 1700, $maioresLancesArr[2]->getValor());
     }
 
+    public function testLeilaoVazioNaoPodeSerAvaliado()
+    {
+        $leilao = new Leilao('Fusca azul');
+        $this->leiloeiro->avalia($leilao);
+    }
+
     /* --- DADOS --- */
 
     public function leilaoEmOrdemCrescente()
